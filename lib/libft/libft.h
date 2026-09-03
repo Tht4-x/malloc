@@ -88,6 +88,7 @@ int			ft_strprefix(const char *s, const char *prefix);
 int			ft_dup2(int oldfd, int newfd);
 int			ft_is_in_the_set(char c, char *set);
 int			ft_printf(const char *format, ...);
+int			ft_dprintf(int fd, const char *format, ...);
 int			ft_puthex(unsigned long long num, char format);
 int			ft_putnbr_unsigned(unsigned int n);
 int			ft_putnbr(int n);

@@ -56,7 +56,7 @@ static t_zone	*find_zone(t_zone *zones, t_block *block, t_zone **prev_zone)
 	return (NULL);
 }
 
-void	free(void *ptr)
+void	free_impl(void *ptr)
 {
 	t_block	*block;
 	t_zone	*zone;
@@ -75,4 +75,12 @@ void	free(void *ptr)
 	zone = find_zone(g_malloc.large, block, &prev_zone);
 	if (zone)
 		return (free_from(&g_malloc.large, prev_zone, zone, block, 1));
+}
+
+void	free(void *ptr)
+{
+	pthread_mutex_lock(&g_mutex);
+	free_impl(ptr);
+	pthread_mutex_unlock(&g_mutex);
+	debug_free(ptr);
 }

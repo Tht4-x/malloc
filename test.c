@@ -14,7 +14,7 @@ int	main(void)
 	large_2 = malloc(2000);
 
 	show_alloc_mem();
-	ft_putstr("\n");
+	ft_printf("\n");
 
 	tiny_1 = realloc(tiny_1, 0); 
 	tiny_2 = realloc(tiny_2, 50);
@@ -22,7 +22,7 @@ int	main(void)
 	small_2 = realloc(NULL, 400);
 	large_2 = realloc(large_2, 2050);
 	show_alloc_mem();
-	ft_putstr("\n");
+	ft_printf("\n");
 
 	free(tiny_1);
 	free(tiny_2);

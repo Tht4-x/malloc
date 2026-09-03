@@ -5,6 +5,7 @@
 # include <sys/resource.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <pthread.h>
 # include "libft.h"
 
 # define TINY_MAX	128
@@ -31,12 +32,19 @@ typedef struct s_malloc
 	t_zone	*large;
 }					t_malloc;
 
-extern t_malloc		g_malloc;
+extern t_malloc			g_malloc;
+extern pthread_mutex_t	g_mutex;
 
 size_t	align16(size_t size);
 t_zone	*new_zone(size_t capacity);
 void	merge_next(t_block *block);
 void	split_block(t_block *block, size_t size);
 void	show_alloc_mem(void);
+void	show_alloc_mem_ex(void);
+void	*malloc_impl(size_t size);
+void	free_impl(void *ptr);
+void	debug_malloc(size_t size, void *ptr);
+void	debug_free(void *ptr);
+void	debug_realloc(void *old, size_t size, void *new_ptr);
 
 #endif

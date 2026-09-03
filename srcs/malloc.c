@@ -1,6 +1,7 @@
 #include "malloc.h"
 
-t_malloc	g_malloc;
+t_malloc		g_malloc;
+pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	split_block(t_block *block, size_t size)
 {
@@ -54,7 +55,7 @@ static t_block	*get_block(t_zone **list, size_t zone_capacity, size_t size)
 	return (zone->blocks);
 }
 
-void	*malloc(size_t size)
+void	*malloc_impl(size_t size)
 {
 	size_t	aligned;
 	t_block	*block;
@@ -75,4 +76,15 @@ void	*malloc(size_t size)
 	split_block(block, aligned);
 	block->free = 0;
 	return ((char *)block + sizeof(t_block));
+}
+
+void	*malloc(size_t size)
+{
+	void	*ptr;
+
+	pthread_mutex_lock(&g_mutex);
+	ptr = malloc_impl(size);
+	pthread_mutex_unlock(&g_mutex);
+	debug_malloc(size, ptr);
+	return (ptr);
 }
