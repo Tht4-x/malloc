@@ -25,9 +25,9 @@ LINKNAME  = libft_malloc.so
 
 CC        = cc
 CFLAGS    = -Wall -Wextra -Werror -g3 -fPIC -pthread
-INCLUDES  = -I includes -I lib/libft
+INCLUDES  = -I includes -I libft
 
-LIBFT_DIR = lib/libft
+LIBFT_DIR = libft
 LIBFT     = $(LIBFT_DIR)/libft.a
 
 SRC_DIR   = srcs

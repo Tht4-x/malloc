@@ -65,7 +65,6 @@ void	free_impl(void *ptr)
 	if (!ptr)
 		return ;
 	block = (t_block *)((char *)ptr - sizeof(t_block));
-	
 	zone = find_zone(g_malloc.tiny, block, &prev_zone);
 	if (zone)
 		return (free_from(&g_malloc.tiny, prev_zone, zone, block, 0));

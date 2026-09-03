@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-# define DUMP_MAX 128
+# define DUMP_MAX 64
 
 static void	put_byte_hex(unsigned char byte, int fd)
 {
@@ -74,10 +74,7 @@ static void	show_zone_ex(t_zone *zone, char *label)
 		{
 			if (!block->free)
 			{
-				ft_printf("%p - %p : %zu bytes\n",
-					(void *)((char *)block + sizeof(t_block)),
-					(void *)((char *)block + sizeof(t_block)
-						+ block->size), block->size);
+				ft_printf("%p - %p : %zu bytes\n", (void *)((char *)block + sizeof(t_block)), (void *)((char *)block + sizeof(t_block) + block->size), block->size);
 				hexdump_block(block);
 			}
 			block = block->next;

@@ -39,7 +39,7 @@
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [
     "includes",
-    "lib/libft"
+    "libft"
   ],
   "C_Cpp_Runner.includeSearch": [
     "*",
