@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -86,5 +87,12 @@ int			ft_strchrcounter(const char *s, int c);
 int			ft_strprefix(const char *s, const char *prefix);
 int			ft_dup2(int oldfd, int newfd);
 int			ft_is_in_the_set(char c, char *set);
+int			ft_printf(const char *format, ...);
+int			ft_puthex(unsigned long long num, char format);
+int			ft_putnbr_unsigned(unsigned int n);
+int			ft_putnbr(int n);
+int			ft_putptr(void *ptr);
+int			ft_putstr(char *str);
+int			ft_putchar(char c);
 
 #endif

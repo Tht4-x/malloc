@@ -8,13 +8,13 @@ static size_t	show_zone(t_zone *zone, char *label)
 	total = 0;
 	while (zone)
 	{
-		printf("%s : %p\n", label, (void *)zone);
+		ft_printf("%s : %p\n", label, (void *)zone);
 		block = zone->blocks;
 		while (block)
 		{
 			if (!block->free)
 			{
-				printf("%p - %p : %zu bytes\n",	(void *)((char *)block + sizeof(t_block)), (void *)((char *)block + sizeof(t_block) + block->size),	block->size);
+				ft_printf("%p - %p : %u bytes\n", (void *)((char *)block + sizeof(t_block)), (void *)((char *)block + sizeof(t_block) + block->size), (unsigned int)block->size);
 				total += block->size;
 			}
 			block = block->next;
@@ -32,5 +32,5 @@ void	show_alloc_mem(void)
 	total += show_zone(g_malloc.tiny, "TINY");
 	total += show_zone(g_malloc.small, "SMALL");
 	total += show_zone(g_malloc.large, "LARGE");
-	printf("Total : %zu bytes\n", total);
+	ft_printf("Total : %u bytes\n", (unsigned int)total);
 }
