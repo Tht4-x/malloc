@@ -2,7 +2,7 @@
 
 t_malloc	g_malloc;
 
-static void	split_block(t_block *block, size_t size)
+void	split_block(t_block *block, size_t size)
 {
 	t_block	*new_block;
 
@@ -44,9 +44,11 @@ static t_block	*get_block(t_zone **list, size_t zone_capacity, size_t size)
 	block = find_free_block(*list, size);
 	if (block)
 		return (block);
+
 	zone = new_zone(zone_capacity);
 	if (!zone)
 		return (NULL);
+
 	zone->next = *list;
 	*list = zone;
 	return (zone->blocks);

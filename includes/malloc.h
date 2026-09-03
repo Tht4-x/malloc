@@ -35,5 +35,8 @@ extern t_malloc		g_malloc;
 
 size_t	align16(size_t size);
 t_zone	*new_zone(size_t capacity);
+void	merge_next(t_block *block);
+void	split_block(t_block *block, size_t size);
+void	show_alloc_mem(void);
 
 #endif

@@ -51,6 +51,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
 
+# TEST
+# ============================
+
+TEST_SRC = test.c
+TEST_BIN = test_malloc
+
+test: $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(TEST_SRC) -L. -lft_malloc -Wl,-rpath,. -o $(TEST_BIN)
+	./$(TEST_BIN)
+
 # CLEANING
 # ============================
 clean:
@@ -59,7 +69,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) fclean -s -C $(LIBFT_DIR)
-	rm -f $(NAME) $(LINKNAME)
+	rm -f $(NAME) $(LINKNAME) $(TEST_BIN)
 
 
 # REBUILD
@@ -68,5 +78,5 @@ re: fclean all
 
 # GHOST
 # ============================
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
