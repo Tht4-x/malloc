@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dancel <dancel@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/04 00:00:00 by dancel            #+#    #+#             */
+/*   Updated: 2026/09/04 00:00:00 by dancel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 
 static t_block	*block_prev(t_zone *zone, t_block *block)
@@ -14,7 +26,7 @@ static t_block	*block_prev(t_zone *zone, t_block *block)
 	return (NULL);
 }
 
-static void	free_from(t_zone **list, t_zone *prev_zone, t_zone *zone, t_block *block, int reclaim_if_empty)
+static void	free_from(t_zone **list, t_zone *prev_zone, t_zone *zone, t_block *block)
 {
 	t_block	*prev_block;
 
@@ -26,7 +38,7 @@ static void	free_from(t_zone **list, t_zone *prev_zone, t_zone *zone, t_block *b
 		merge_next(prev_block);
 		block = prev_block;
 	}
-	if (reclaim_if_empty && block == zone->blocks && !block->next)
+	if (block == zone->blocks && !block->next)
 	{
 		if (prev_zone)
 			prev_zone->next = zone->next;
@@ -67,13 +79,13 @@ void	free_impl(void *ptr)
 	block = (t_block *)((char *)ptr - sizeof(t_block));
 	zone = find_zone(g_malloc.tiny, block, &prev_zone);
 	if (zone)
-		return (free_from(&g_malloc.tiny, prev_zone, zone, block, 0));
+		return (free_from(&g_malloc.tiny, prev_zone, zone, block));
 	zone = find_zone(g_malloc.small, block, &prev_zone);
 	if (zone)
-		return (free_from(&g_malloc.small, prev_zone, zone, block, 0));
+		return (free_from(&g_malloc.small, prev_zone, zone, block));
 	zone = find_zone(g_malloc.large, block, &prev_zone);
 	if (zone)
-		return (free_from(&g_malloc.large, prev_zone, zone, block, 1));
+		return (free_from(&g_malloc.large, prev_zone, zone, block));
 }
 
 void	free(void *ptr)
