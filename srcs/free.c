@@ -92,6 +92,7 @@ void	free(void *ptr)
 {
 	pthread_mutex_lock(&g_mutex);
 	free_impl(ptr);
+	record_history('F', ptr, 0);
 	pthread_mutex_unlock(&g_mutex);
 	debug_free(ptr);
 }

@@ -96,6 +96,7 @@ void	*malloc(size_t size)
 
 	pthread_mutex_lock(&g_mutex);
 	ptr = malloc_impl(size);
+	record_history('M', ptr, size);
 	pthread_mutex_unlock(&g_mutex);
 	debug_malloc(size, ptr);
 	return (ptr);

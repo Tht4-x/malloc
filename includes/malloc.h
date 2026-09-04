@@ -22,6 +22,14 @@
 
 # define TINY_MAX	128
 # define SMALL_MAX	1024
+# define HISTORY_MAX	200
+
+typedef struct s_history
+{
+	char	action;
+	void	*ptr;
+	size_t	size;
+}			t_history;
 
 typedef struct s_block
 {
@@ -39,9 +47,11 @@ typedef struct s_zone
 
 typedef struct s_malloc
 {
-	t_zone	*tiny;
-	t_zone	*small;
-	t_zone	*large;
+	t_zone		*tiny;
+	t_zone		*small;
+	t_zone		*large;
+	t_history	history[HISTORY_MAX];
+	size_t		history_count;
 }					t_malloc;
 
 extern t_malloc			g_malloc;
@@ -58,5 +68,7 @@ void	free_impl(void *ptr);
 void	debug_malloc(size_t size, void *ptr);
 void	debug_free(void *ptr);
 void	debug_realloc(void *old, size_t size, void *new_ptr);
+void	record_history(char action, void *ptr, size_t size);
+void	show_alloc_history(void);
 
 #endif

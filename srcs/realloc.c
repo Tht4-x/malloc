@@ -61,6 +61,7 @@ void	*realloc(void *ptr, size_t size)
 
 	pthread_mutex_lock(&g_mutex);
 	result = realloc_impl(ptr, size);
+	record_history('R', result, size);
 	pthread_mutex_unlock(&g_mutex);
 	debug_realloc(ptr, size, result);
 	return (result);
