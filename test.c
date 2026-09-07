@@ -6,7 +6,7 @@
 /*   By: dancel <dancel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 00:00:00 by dancel            #+#    #+#             */
-/*   Updated: 2026/09/04 00:00:00 by dancel           ###   ########.fr       */
+/*   Updated: 2026/09/04 18:04:00 by dancel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ int	main(void)
 		show_alloc_mem();	
 	else
 		show_alloc_mem_ex();
+		
+	ft_printf("\n");
+	if (getenv("MALLOC_DEBUG"))
+		show_alloc_history();
 	return (0);
 }
